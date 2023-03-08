@@ -33,8 +33,13 @@ passport.use(new GitHubStrategy({
   return done(null, profile);
 }));
 
+passport.serializeUser(function (user, done) {
+  return done(null, user);
+});
 
-
+passport.deserializeUser(function (user, done) {
+  return done(null, user);
+});
 
 
 
