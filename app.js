@@ -26,7 +26,7 @@ const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
  * Passport Configurations
 */
 passport.use(new GitHubStrategy({
-  clientId: GITHUB_CLIENT_ID,
+  clientID: GITHUB_CLIENT_ID,
   clientSecret: GITHUB_CLIENT_SECRET,
   callbackURL: "http://localhost:3000/auth/github/callback",
 }, function (accessToken, refreshToken, profile, done) {
@@ -55,7 +55,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(session({
   secret: 'codecademy',
   resave: false,
-  saveUnitialized: false,
+  saveUninitialized: false,
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -82,7 +82,7 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-app.get('/auth/github', passport.authenticate('github', { scope: 'user' }));
+app.get('/auth/github', passport.authenticate('github', { scope: ['user'] }));
 
 app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login', successRedirect: '/' }));
 
